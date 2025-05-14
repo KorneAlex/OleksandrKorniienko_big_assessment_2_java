@@ -50,7 +50,32 @@ public class Driver {
     //  General Menu Items
     //---------------------
 
-//TODO - write all the methods that are called from your menu
+    private void runPlanetAPIMenu(){
+
+    }
+
+    private int planetsMenu(int option){
+        return ScannerInput.readNextInt("==>> ");
+    }
+
+    private int reportsMenu(int option){
+        return ScannerInput.readNextInt("==>> ");
+    }
+
+    public void runReportsMenu(){
+
+    }
+
+
+    public int planetReportsMenu(int option){
+        return ScannerInput.readNextInt("==>> ");
+    }
+
+    public void runPlanetReportsMenu(){
+
+    }
+
+    //TODO - write all the methods that are called from your menu
     //---------------------
     //  Search/Sort
     //---------------------
@@ -59,9 +84,35 @@ public class Driver {
     //---------------------
     //  Helper Methods
     //---------------------
+    private void listAllPlanetsSmallerThan(){
+
+    }
+
+    private void listAllPlanetsHeavierThan(){
+
+    }
 
 //TODO- write any helper methods that are required
 
+    private void addPlanet(){
+
+    }
+
+    private void deletePlanet(){
+
+    }
+
+    private int getValidId(){
+        return 0;
+    }
+
+    private void loadAllData(){
+
+    }
+
+    private void saveAllData(){
+
+    }
 
 }
 
