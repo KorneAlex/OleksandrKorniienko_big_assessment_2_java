@@ -86,4 +86,32 @@ public class Utilities {
     public static boolean isValidIndex(List list, int indexToCheck){
         return ((indexToCheck >= 0) && (indexToCheck < list.size()));
     }
+
+
+//==========================my_utilities========================================
+
+//=========================================Menu Builder=============================================================
+
+/**
+ * This method creates a header with two lines in it and 2 pairs of strings centered depending on width you entered
+ * like this:
+ * <p>
+ * ***********************************************************************************
+ * Course Name: HDIP25
+ * Students in the course: 45
+ * **********************************************************************************
+ *
+ * @param programWidth            width of your program in console
+ * @param name                    first line string value. something like: "Course name: "
+ * @param nameParameter           first line string value. ex: Sting.valueOf(course.getName()) or "HDIP25"
+ * @param additionalInfo          second line string value. ex: "Number of students: "
+ * @param additionalInfoParameter second line string value. ex: Sting.valueOf(course.getStudentsCount()) or "45"
+ */
+public static void header(int programWidth, String name, String nameParameter, String additionalInfo, String additionalInfoParameter) {
+    System.out.println(StringUtilities.printStars(programWidth));
+    int margin = (programWidth - (int) Checkers.maxOfTwo(name.length() + nameParameter.length(), additionalInfo.length() + additionalInfoParameter.length())) / 2;
+    System.out.println(StringUtilities.printSymbols(" ", margin) + name + nameParameter);
+    System.out.print(StringUtilities.printSymbols(" ", margin) + additionalInfo + additionalInfoParameter);
+    System.out.println(StringUtilities.printStars(programWidth));
+    }
 }
