@@ -1,10 +1,7 @@
 package main;
 
 import controllers.PlanetSystemAPI;
-
 import utils.ScannerInput;
-
-import java.io.File;
 
 public class Driver {
 
