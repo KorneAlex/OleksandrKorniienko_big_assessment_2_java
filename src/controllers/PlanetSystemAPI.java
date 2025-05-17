@@ -2,20 +2,22 @@ package controllers;
 
 
 import models.Planet;
+import utils.FileOperations;
 import utils.ISerializer;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 public class PlanetSystemAPI {
 
     //TODO Create a list to store the Planets
 
-    private List<Planet> planets = new ArrayList<>();
+    private List<Planet> universe = new ArrayList<>();
 
     //TODO create a File field to store filename
-    private File planetSystemFile = null;
+    private File planetSystemFile = new File("universe.xml");
 
 
     //TODO create constructor to initialise filename and instantiate the planets list
@@ -23,7 +25,8 @@ public class PlanetSystemAPI {
     //TODO - ========================CRUD_Methods========================
 
     public boolean addPlanet(Planet planet) {
-        return false;
+        universe.add(planet);
+        return true;
     }
 
     public Planet updateIcePlanet(int number, Planet IcePlanet) {
@@ -84,7 +87,7 @@ public class PlanetSystemAPI {
     //to suit your code - checks is the id already there in the list
 
     public boolean isValidId(int id) {
-        for (Planet pl : planets) {
+        for (Planet pl : universe) {
             if (pl.getId() == id)
                 return false;
         }
@@ -138,10 +141,12 @@ public class PlanetSystemAPI {
     }
 
     public void load() {
-
+        universe.clear();
+        universe.addAll(FileOperations.loadPlanetSystem());
     }
 
     public void save() {
-
+        FileOperations.savePlanetSystem(universe, planetSystemFile);
     }
-}   
+
+}

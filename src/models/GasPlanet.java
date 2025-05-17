@@ -1,9 +1,11 @@
 package models;
 
 public class GasPlanet extends Planet{
-    private String gasComposition = "";
-    private String coreComposition = "";
-    private double radiationLevel = 0;
+    private String gasComposition = ""; // max 20 chars
+    private String coreComposition = "UNKNOWN"; //Must be one of:
+    // Rocky and Metallic, Proportionally Small, Liquid Metallic Hydrogen Compressed Hydrogen or Ice Giant
+    // default UNKNOWN can use CoreCompositionUtility class
+    private double radiationLevel = 0.9; // Higher in gas giant min .01 max 200.05 default .9
     public GasPlanet(String name, double mass, double diameter, double averageTemperature, String surfaceType, boolean hasLiquidWater, String gasComposition, String coreComposition, double radiationLevel) {
         super(name, mass, diameter, averageTemperature, surfaceType, hasLiquidWater);
 
@@ -26,11 +28,11 @@ public class GasPlanet extends Planet{
     //=============================setters=========================================
 
     public void setGasComposition(String gasComposition) {
-
+        this.gasComposition = gasComposition;
     }
 
     public void setCoreComposition(String coreComposition) {
-
+        this.coreComposition = coreComposition;
     }
 
     public void setRadiationLevel(double radiationLevel) {
@@ -43,17 +45,33 @@ public class GasPlanet extends Planet{
 
     //=============================other_methods===================================
 
+    /**
+     *
+     * @return the String with the the text "Gas Planet" in it
+     */
     @Override
     public String classifyBody(){
-        return "";
+        return "Gas Planet";
     }
+
+    /**
+     * @return the String with the field information
+     * e.g. Gas Composition: mostly Gas, Core Composition: Rocky and Metallic radiationLevel: 200
+     *
+     */
     @Override
     public String displayInfo(){
-        return "";
+        return "Gas Composition: " + gasComposition + ", Core Composition: " + coreComposition + " Radiation level: " + radiationLevel + "%";
     }
+
+    /**
+     * This method should build a one line string containing the following information and return it (note: no \n should be included in the String):
+     * details from the Planet toString() as well as fields above
+     * @return
+     */
     @Override
     public String toSting() {
-        return "";
+        return classifyBody() + ": " + displayInfo() + " " + super.toSting();
     }
 
 }
