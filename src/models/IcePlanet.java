@@ -1,5 +1,7 @@
 package models;
 
+import utils.StringUtilities;
+
 public class IcePlanet extends Planet{
     private String iceComposition = "Mostly Ice"; // max 30 chars
     public IcePlanet(String name, double mass, double diameter, double averageTemperature, String surfaceType, boolean hasLiquidWater, String iceComposition){
@@ -33,8 +35,11 @@ public class IcePlanet extends Planet{
         return "Ice Composition: " + iceComposition;
     }
     @Override
-    public String toSting(){
-        return classifyBody() + displayInfo() + " " + super.toSting();
+    public String toString(){
+        return classifyBody() + displayInfo() + " " + super.toString();
 
+    }
+    public String toTable(){
+        return String.format("%2s %4s %3s %-31s %3s %10s %3s %10s %3s %21s %3s %8s %3s %12s %3s %30s %2s \n", "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ", isHasLiquidWater(), " █ ", getIceComposition(), " █ ");
     }
 }

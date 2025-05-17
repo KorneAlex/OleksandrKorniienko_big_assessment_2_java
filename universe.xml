@@ -1,0 +1,42 @@
+<list>
+  <models.IcePlanet>
+    <id>1000</id>
+    <name>Test Planet</name>
+    <mass>22.5</mass>
+    <diameter>656.99</diameter>
+    <averageTemperature>65.8</averageTemperature>
+    <surfaceType>Rocks</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>ICEEEE</iceComposition>
+  </models.IcePlanet>
+  <models.IcePlanet>
+    <id>1001</id>
+    <name>Test Planet</name>
+    <mass>2222.5548</mass>
+    <diameter>656.99</diameter>
+    <averageTemperature>65.8</averageTemperature>
+    <surfaceType>Rocks</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>ICEEEE</iceComposition>
+  </models.IcePlanet>
+  <models.IcePlanet>
+    <id>1002</id>
+    <name>Test Planet</name>
+    <mass>22.5</mass>
+    <diameter>656.99</diameter>
+    <averageTemperature>65.8</averageTemperature>
+    <surfaceType>Rocks</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>ICEEEE lalalalala</iceComposition>
+  </models.IcePlanet>
+  <models.IcePlanet>
+    <id>1000</id>
+    <name>Test Planet</name>
+    <mass>22.5</mass>
+    <diameter>656.99</diameter>
+    <averageTemperature>65.8</averageTemperature>
+    <surfaceType>Rocks</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>ICEEEE</iceComposition>
+  </models.IcePlanet>
+</list>

@@ -10,10 +10,10 @@ import java.text.DecimalFormat;
 public class Driver {
 
     public static final DecimalFormat df = new DecimalFormat("0.00");
-    public static int programWidth = 150;
+    public static int programWidth = 167;
     public static int menuWidth = 55;
     public static int menuMargin = (programWidth - menuWidth) / 2; // the number to use with utils.Utilities.printSymbol to make menus margin
-    public static int listWidth = 119;
+    public static int listWidth = 167;
     public static int listMargin = (programWidth - listWidth) / 2;
 
     private PlanetSystemAPI planetAPI = new PlanetSystemAPI();
@@ -62,13 +62,14 @@ public class Driver {
                 runReportsMenu();
                 break;
             case 3:
-                planetReportsMenu(1);
+//                searchPlanets();
                 break;
             case 4:
                 planetReportsMenu(2);
                 break;
             case 5: // test
-                addPlanet();
+                loadAllData();
+                listAllPlanets();
                 break;
             case 10:
                 saveAllData();
@@ -124,7 +125,17 @@ public class Driver {
             case 3:
                 listMenu();
                 break;
+            case 4:
+//                updatePlanet();
+                break;
+            case 0:
+                runMainMenu();
+                break;
+            default:
+                System.out.println("Invalid option");
+                runPlanetAPIMenu();
         }
+        runPlanetAPIMenu();
     }
 
     private void listMenu() {
@@ -132,8 +143,10 @@ public class Driver {
         System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|                      List Menu                      |\n");
         System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|_____________________________________________________|\n");
         System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  1. List all Planets                                |\n");
-        System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  2. List all Planets smaller than diameter          |\n");
-        System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  3. List all Planets heavier than mass              |\n");
+        System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  2. List all Ice Planets                            |\n");
+        System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  3. List all Gas Planets                            |\n");
+        System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  4. List all Planets smaller than diameter          |\n");
+        System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  5. List all Planets heavier than mass              |\n");
         System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|-----------------------------------------------------|\n");
         System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|  0. Return to the Main menu                         |\n");
         System.out.print(StringUtilities.printSymbols(" ", menuMargin) + "|_____________________________________________________|\n");
@@ -144,9 +157,15 @@ public class Driver {
                 listAllPlanets();
                 break;
             case 2:
-                listAllPlanetsSmallerThan();
+                planetAPI.listAllIcePlanets();
                 break;
             case 3:
+                planetAPI.listAllGasPlanets();
+                break;
+            case 4:
+                listAllPlanetsSmallerThan();
+                break;
+            case 5:
                 listAllPlanetsHeavierThan();
                 break;
             case 0:
@@ -154,8 +173,9 @@ public class Driver {
                 break;
             default:
                 System.out.println("Invalid option");
-                runPlanetAPIMenu();
+                listMenu();
         }
+        listMenu();
     }
 
     private int planetsMenu(int option) {
@@ -247,7 +267,6 @@ private void listAllPlanets() {
         System.out.println("There are no planets in the system");
     } else {
         System.out.println("There are " + planetAPI.numberPlanetBodies() + " planets in the system");
-        System.out.println("The planets are as follows:");
         System.out.println(planetAPI.listAllPlanetBodies());
     }
 }

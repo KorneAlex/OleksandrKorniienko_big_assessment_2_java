@@ -70,8 +70,11 @@ public class GasPlanet extends Planet{
      * @return
      */
     @Override
-    public String toSting() {
-        return classifyBody() + ": " + displayInfo() + " " + super.toSting();
+    public String toString() {
+        return classifyBody() + ": " + displayInfo() + " " + super.toString();
     }
-
+    @Override
+    public String toTable(){
+        return String.format("%2s %4s %3s %-31s %3s %6s %3s %10s %3s %21s %3s %12s %3s %12s %3s %30s %2s \n", "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ", isHasLiquidWater(), " █ ", getGasComposition(), " █ ");
+    }
 }

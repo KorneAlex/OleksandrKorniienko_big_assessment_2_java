@@ -114,4 +114,5 @@ public static void header(int programWidth, String name, String nameParameter, S
     System.out.print(StringUtilities.printSymbols(" ", margin) + additionalInfo + additionalInfoParameter);
     System.out.println(StringUtilities.printStars(programWidth));
     }
+
 }

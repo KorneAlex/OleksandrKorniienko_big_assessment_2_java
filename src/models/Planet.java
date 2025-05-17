@@ -19,7 +19,7 @@ public abstract class Planet {
         this.averageTemperature = averageTemperature;
         this.surfaceType = surfaceType;
         this.hasLiquidWater = hasLiquidWater;
-        id = nextId;
+        this.id = nextId;
         nextId++;
     }
 
@@ -44,7 +44,7 @@ public abstract class Planet {
         return surfaceType;
     }
 
-    public static int getId() { return 0; } // FIX THIS
+    public int getId() { return id; } // FIX THIS
 
     public static int getNextId(){
         return nextId;
@@ -112,7 +112,10 @@ public abstract class Planet {
      */
     public abstract String displayInfo();
 
-    public String toSting(){
-        return "";
+    public abstract String toTable();
+
+    public String toString(){
+        return id + name + mass + diameter + averageTemperature + surfaceType + hasLiquidWater;
+
     }
 }

@@ -1,9 +1,14 @@
 package controllers;
 
 
+import main.Driver;
+import models.GasPlanet;
+import models.IcePlanet;
 import models.Planet;
 import utils.FileOperations;
 import utils.ISerializer;
+import utils.StringUtilities;
+import utils.Utilities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,31 +59,68 @@ public class PlanetSystemAPI {
     }
 
     // TODO ========================Reporting_Methods========================
-
+    private final String format = "%2s %4s %3s %31s %3s %10s %3s %10s %3s %21s %3s %8s %3s %12s %3s %30s %2s \n";
     public String listAllPlanetBodies() {
-        return "";
+        if (universe.isEmpty()) {
+            return "There are no planets in the system.";
+        } else {
+            Utilities.header(Driver.programWidth, "Universe has: ", String.valueOf(universe.size() + " planets."), "", "");
+
+            System.out.println(StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth));
+            System.out.print(StringUtilities.printSymbols(" ", Driver.listMargin) + String.format(format, "█ ", "ID ", " █ ", "Planet Name          ", " █ ", "Mass   ", " █ ", "Diameter ", " █ ", "Surface Type    ", " █ ", "Av. Temp", " █ ", "Liquid Water", " █ ", "Composition         ", " █ "));
+            System.out.println(StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth));
+            for (Planet planet : universe) {
+                System.out.print(StringUtilities.printSymbols(" ", Driver.listMargin) + planet.toTable());
+            }
+            System.out.println(StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth));
+        }
+        return ""; // waiting for the answer if i can change the type
     }
 
+
+
     public String listAllIcePlanets() {
-        return "";
+        for (Planet planet : universe) {
+            if (planet instanceof IcePlanet){
+                System.out.print(planet.toTable());
+            }
+        }
+        return ""; // waiting for the answer if i can change the type
     }
 
     public String listAllGasPlanets() {
-        return "";
+        for (Planet planet : universe) {
+            if (planet instanceof GasPlanet){
+                System.out.print(planet.toTable());
+            }
+        }
+        return ""; // waiting for the answer if i can change the type
     }
 
     // TODO ========================number_methods========================
 
     public int numberPlanetBodies() {
-        return 0;
+        return universe.size();
     }
 
     public int numberOfIcePlanets() {
-        return 0;
+        int counter = 0;
+        for (Planet planet : universe) {
+            if (planet instanceof IcePlanet){
+                counter++;
+            }
+        }
+        return counter;
     }
 
     public int numberOfGasPlanets() {
-        return 0;
+        int counter = 0;
+        for (Planet planet : universe) {
+            if (planet instanceof GasPlanet){
+                counter++;
+            }
+        }
+        return counter;
     }
 
 
@@ -87,8 +129,8 @@ public class PlanetSystemAPI {
     //to suit your code - checks is the id already there in the list
 
     public boolean isValidId(int id) {
-        for (Planet pl : universe) {
-            if (pl.getId() == id)
+        for (Planet planet : universe) {
+            if (planet.getId() == id)
                 return false;
         }
         return true;
@@ -142,7 +184,7 @@ public class PlanetSystemAPI {
 
     public void load() {
         universe.clear();
-        universe.addAll(FileOperations.loadPlanetSystem());
+        universe.addAll(FileOperations.loadPlanetSystem(planetSystemFile));
     }
 
     public void save() {

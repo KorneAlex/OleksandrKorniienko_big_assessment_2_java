@@ -42,7 +42,7 @@ public class FileOperations {
         }
     }
 
-    public static ArrayList loadPlanetSystem() {
+    public static ArrayList loadPlanetSystem(File fileName) {
         /**
          * This method loads classes Course and Student from the .xml file
          *
@@ -54,7 +54,7 @@ public class FileOperations {
         try {
             XStream xstream = new XStream(new DomDriver());
             xstream.allowTypes(new Class[]{IcePlanet.class, GasPlanet.class});
-            FileReader reader = new FileReader("universe.xml");
+            FileReader reader = new FileReader(fileName);
             ArrayList universe = (ArrayList) xstream.fromXML(reader);
             reader.close();
             System.out.println("Loaded universe from universe.xml");
