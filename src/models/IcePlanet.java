@@ -1,5 +1,6 @@
 package models;
 
+import main.Driver;
 import utils.StringUtilities;
 
 public class IcePlanet extends Planet{
@@ -40,6 +41,6 @@ public class IcePlanet extends Planet{
 
     }
     public String toTable(){
-        return String.format("%2s %4s %3s %-31s %3s %10s %3s %10s %3s %21s %3s %8s %3s %12s %3s %30s %2s \n", "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ", isHasLiquidWater(), " █ ", getIceComposition(), " █ ");
+        return String.format(Driver.format, "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ", isHasLiquidWater(), " █ ", getIceComposition(), " █ ", "-", " █ ","-", " █ ");
     }
 }

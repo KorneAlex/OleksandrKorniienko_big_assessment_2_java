@@ -32,11 +32,11 @@ public class Checkers {
     }
 
 
-    public static int isInRange(int min, int max) {
         /** This method gets sting and tries to parse an integer between min and max.
          If not - creates recursion until the number that fit our expectations entered.
          P.S. I had two of these methods, but I created a universal one! DRY!
          */
+    public static int isInRange(int min, int max) {
         String pos = ScannerInput.nextLine();
         try {
             int num = Integer.parseInt(pos);
@@ -112,12 +112,35 @@ public class Checkers {
             if (min <= num && num <= max) {
                 return num;
             } else {
-                System.out.print("\nEntered number is not in range [ " + min + ", " + max + "]. Try again: ");
+                System.err.print("\nEntered number is not in range [ " + min + ", " + max + "]. Try again: ");
                 return isInRange(min, max);
             }
         } catch (NumberFormatException e) {
-            System.out.print("\nPlease enter a number in range [ " + min + ", " + max + "]: ");
+            System.err.print("\nPlease enter a number in range [ " + min + ", " + max + "]: ");
             return isInRange(min, max);
         }
+    }
+
+    /**
+     * This method returns the user input only if the input is bigger than the min value
+     * @param minimumValue the min value to compare with the input
+     * @return users' input when bigger than the min value
+     */
+    public static double inputIsBiggerThan(double minimumValue) {
+        double input = ScannerInput.nextDouble();
+        if (input > minimumValue) {
+            return input;
+        }
+        System.err.print("\nEntered number is less than " + minimumValue + ". Try again: ");
+        return inputIsBiggerThan(minimumValue);
+    }
+
+    public static double inputIsInRange(double min, double max) {
+        double input = ScannerInput.nextDouble();
+        if (input >= min && input <= max) {
+            return input;
+        }
+        System.err.print("\nEntered number is not in range " + min + " and " + max + ". Try again: ");
+        return inputIsInRange(min, max);
     }
 }

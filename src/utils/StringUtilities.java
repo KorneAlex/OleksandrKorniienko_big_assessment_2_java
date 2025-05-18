@@ -75,26 +75,4 @@ public class StringUtilities {
      * @param name gets name from the user
      * @return edited name
      */
-    public static String nameCapitals(String name) {
-        name = name.trim(); // delete unnessesary spaces
-        name = name.toLowerCase(); // everything in the lowercase
-        for (int i = 0; i < name.length(); i++) {
-            if (i == 0) {
-                name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase(); // if it's the first character then make it capital
-            } else if (name.charAt(i - 1) == ' ') {
-                // name = 0 to current character excluded + this character in uppercase + everything else in lowercase
-                name = name.substring(0, i) + name.substring(i, i + 1).toUpperCase() + name.substring(i + 1).toLowerCase();
-            } else if (i > 3 && name.charAt(i - 3) == ' ') {
-                String prefix = name.substring(i - 3, i - 2) + name.charAt(i - 2) + name.charAt(i - 1); // if prefix " Mc" or " O'" makes the following letter capital
-                if (prefix.equals(" Mc")) { // .equals is checking if the value in the memory slot mc is equal to " Mc". Doesn't work if compare to the another part of memory with the same text.
-                    // name = 0 to current character excluded + this character in uppercase + everything else in lowercase
-                    name = name.substring(0, i) + name.substring(i, i + 1).toUpperCase() + name.substring(i + 1).toLowerCase();
-                } else if (prefix.equals(" O'")) {
-                    // name = 0 to current character excluded + this character in uppercase + everything else in lowercase
-                    name = name.substring(0, i) + name.substring(i, i + 1).toUpperCase() + name.substring(i + 1).toLowerCase();
-                }
-            }
-        }
-        return name;
-    }
 }

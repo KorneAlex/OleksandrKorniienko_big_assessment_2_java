@@ -39,7 +39,6 @@ public class ScannerInput {
      * Read a double from the user.  If the entered data isn't actually a double,
      * the user is prompted again to enter the double.
      *
-     * @param prompt The information printed to the console for the user to read
      * @return The number read from the user and verified as a double.
      */
     public static double readNextDouble(String prompt) {
@@ -100,11 +99,30 @@ public class ScannerInput {
     private static Scanner input = new Scanner(System.in);
 
     public static String nextLine() {
-        /**
-         * This method reads the next line from the user
-         *
-         * @return Returns the line written by user as a String
-         */
         return input.nextLine();
+    }
+
+    public static double nextDouble() {
+        String str = input.nextLine();
+        try {
+            return Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            System.err.println("Please enter a valid number");
+            return nextDouble();
+        }
+    }
+
+    public static int nextInt() {
+        String str = input.nextLine();
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            System.err.println("Please enter a valid number");
+            return nextInt();
+        }
+    }
+
+    public static void dummy(){
+        input.nextLine();
     }
 }

@@ -5,10 +5,7 @@ import main.Driver;
 import models.GasPlanet;
 import models.IcePlanet;
 import models.Planet;
-import utils.FileOperations;
-import utils.ISerializer;
-import utils.StringUtilities;
-import utils.Utilities;
+import utils.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,14 +16,17 @@ public class PlanetSystemAPI {
 
     //TODO Create a list to store the Planets
 
-    private List<Planet> universe = new ArrayList<>();
+    private List<Planet> universe;
 
     //TODO create a File field to store filename
-    private File planetSystemFile = new File("universe.xml");
+    private File planetSystemFile;
 
 
     //TODO create constructor to initialise filename and instantiate the planets list
-
+public PlanetSystemAPI() {
+    planetSystemFile = new File("universe.xml");
+    universe  = new ArrayList<>();
+}
     //TODO - ========================CRUD_Methods========================
 
     public boolean addPlanet(Planet planet) {
@@ -59,42 +59,74 @@ public class PlanetSystemAPI {
     }
 
     // TODO ========================Reporting_Methods========================
-    private final String format = "%2s %4s %3s %31s %3s %10s %3s %10s %3s %21s %3s %8s %3s %12s %3s %30s %2s \n";
-    public String listAllPlanetBodies() {
-        if (universe.isEmpty()) {
-            return "There are no planets in the system.";
-        } else {
-            Utilities.header(Driver.programWidth, "Universe has: ", String.valueOf(universe.size() + " planets."), "", "");
 
-            System.out.println(StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth));
-            System.out.print(StringUtilities.printSymbols(" ", Driver.listMargin) + String.format(format, "█ ", "ID ", " █ ", "Planet Name          ", " █ ", "Mass   ", " █ ", "Diameter ", " █ ", "Surface Type    ", " █ ", "Av. Temp", " █ ", "Liquid Water", " █ ", "Composition         ", " █ "));
-            System.out.println(StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth));
+    public String listAllPlanetBodies() {
+        String output = "There are no planets in the system.\n";
+        if (numberPlanetBodies() == 0) {
+            return output;
+        } else {
+            output = "";
+            output += header(Driver.programWidth, "Universe has: ", String.valueOf(universe.size() + " planets."), "", "");
+            output += tableInfo(Driver.format);
+
             for (Planet planet : universe) {
-                System.out.print(StringUtilities.printSymbols(" ", Driver.listMargin) + planet.toTable());
+                output += StringUtilities.printSymbols(" ", Driver.listMargin) + planet.toTable();
             }
-            System.out.println(StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth));
+            output += StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth);
         }
-        return ""; // waiting for the answer if i can change the type
+        return output;
+    }
+
+    public String header(int programWidth, String name, String nameParameter, String additionalInfo, String additionalInfoParameter) {
+        String output = "";
+        output += StringUtilities.printStars(programWidth) + "\n";
+        int margin = (programWidth - (int) Checkers.maxOfTwo(name.length() + nameParameter.length(), additionalInfo.length() + additionalInfoParameter.length())) / 2;
+        output += StringUtilities.printSymbols(" ", margin) + name + nameParameter;
+        output += StringUtilities.printSymbols(" ", margin) + additionalInfo + additionalInfoParameter + "\n";
+        output += StringUtilities.printStars(programWidth) + "\n";
+        return output;
+    }
+
+    public String tableInfo(String format){
+        String output = "";
+        output += StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth) + "\n";
+        output += StringUtilities.printSymbols(" ", Driver.listMargin) + String.format(format, "█ ", "ID ", " █ ", "Planet Name          ", " █ ", "Mass   ", " █ ", "Diameter ", " █ ", "Surface Type    ", " █ ", "Av. Temp", " █ ", "Liquid Water", " █ ", "Ice/Gas Composition     ", " █ ", "Core Composition       ", " █ ", "RadLevel % ", " █ ");
+        output += StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth) + "\n";
+    return output;
     }
 
 
 
     public String listAllIcePlanets() {
+        String output = "There are no ice planets in the system.\n";
+        if (numberOfIcePlanets() == 0) {
+            return output;
+        }
+        output += header(Driver.programWidth, "Universe has: ", String.valueOf(numberOfIcePlanets() + " Ice Planets."), "", "");
+        output += tableInfo(Driver.format);
         for (Planet planet : universe) {
             if (planet instanceof IcePlanet){
-                System.out.print(planet.toTable());
+                output += (planet.toTable());
             }
         }
-        return ""; // waiting for the answer if i can change the type
+        output += StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth) + "\n";
+        return output;
     }
 
     public String listAllGasPlanets() {
+        String output = "There are no gas planets in the system.\n";
+        if (numberOfGasPlanets() == 0) {
+            return output;
+        }
+        output += header(Driver.programWidth, "Universe has: ", String.valueOf(numberOfGasPlanets() + " Gas Planets."), "", "");
+        output += tableInfo(Driver.format);
         for (Planet planet : universe) {
             if (planet instanceof GasPlanet){
-                System.out.print(planet.toTable());
+                output += (planet.toTable());
             }
         }
-        return ""; // waiting for the answer if i can change the type
+        output += StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth) + "\n";
+        return output;
     }
 
     // TODO ========================number_methods========================
@@ -136,14 +168,13 @@ public class PlanetSystemAPI {
         return true;
     }
 
-//    public boolean isValidIndex(int index) {
-//        for (Planet pl : planets) {
-//            if (pl.getIndex() == index)
-//                return false;
-//        }
-//        return true;
-//    }
-
+    public boolean isValidIndex(int index) {
+        for (Planet planet : universe) {
+            if (universe.indexOf(planet) == index)
+                return false;
+        }
+        return true;
+    }
 
     //TODO ========================get_Planet_methods========================
 
@@ -159,11 +190,41 @@ public class PlanetSystemAPI {
     //TODO - ========================sort_methods========================
 
     public String listAllPlanetObjectsHeavierThan(double weight) {
-        return "";
+        String output1 = "";
+        String output2 = "";
+        int counter = 0;
+        for(Planet planet : universe){
+            if(planet.getMass() > weight){
+                output2 += planet.toTable();
+                counter++;
+            }
+        }
+        if(counter == 0){
+            return "There are no planets heavier than " + weight + " in the system.\n";
+        }
+        output1 += header(Driver.programWidth, "Universe has: ", String.valueOf(counter + " Planets heavier than " + weight), "", "");
+        output1 += tableInfo(Driver.format);
+        output2 += StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth) + "\n";
+        return output1 + output2;
     }
 
     public String listAllPlanetObjectsSmallerThan(double diameter) {
-        return "";
+        String output1 = "";
+        String output2 = "";
+        int counter = 0;
+        for(Planet planet : universe){
+            if(planet.getDiameter() < diameter){
+                output2 += planet.toTable();
+                counter++;
+            }
+        }
+        if(counter == 0){
+            return "There are no planets smaller than " + diameter + " in the system.\n";
+        }
+        output1 += header(Driver.programWidth, "Universe has: ", String.valueOf(counter + " Planets smaller than " + diameter), "", "");
+        output1 += tableInfo(Driver.format);
+        output2 += StringUtilities.printSymbols(" ", Driver.listMargin) + StringUtilities.printSymbols("█", Driver.listWidth) + "\n";
+        return output1 + output2;
     }
 
     public void sortByDiameterAscending() {
@@ -184,11 +245,11 @@ public class PlanetSystemAPI {
 
     public void load() {
         universe.clear();
-        universe.addAll(FileOperations.loadPlanetSystem(planetSystemFile));
+//        universe.addAll(FileOperations.loadPlanetSystem(planetSystemFile));
     }
 
     public void save() {
-        FileOperations.savePlanetSystem(universe, planetSystemFile);
+//        FileOperations.savePlanetSystem(universe, planetSystemFile);
     }
 
 }

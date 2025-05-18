@@ -7,7 +7,7 @@ public abstract class Planet {
     private double mass = 0.1;
     private double diameter = 0.5;
     private double averageTemperature = 0; // Average surface temperature in °C must be a value between -400 and 400 default 0.
-    // Note: i changed the min temp to -273.15 because the absolute min temp of the Universe is -273.15 Celsius.
+    // Note: I changed the min temp to -273.15 because the absolute min temp of the Universe is -273.15 Celsius.
     private String surfaceType = ""; // max 20 chars
     private boolean hasLiquidWater = false;
 
