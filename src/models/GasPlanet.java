@@ -1,6 +1,7 @@
 package models;
 
 import main.Driver;
+import utils.CoreCompositionUtility;
 
 public class GasPlanet extends Planet{
     private String gasComposition = ""; // max 20 chars
@@ -60,7 +61,7 @@ public class GasPlanet extends Planet{
      */
     @Override
     public String displayInfo(){
-        return "Gas Composition: " + gasComposition + ", Core Composition: " + coreComposition + " Radiation level: " + radiationLevel + "%";
+        return "Gas Composition: " + gasComposition + " Radiation level: " + radiationLevel + "%" + ", Core Composition: " + coreComposition + " " + CoreCompositionUtility.getCoreDescription(CoreCompositionUtility.isValidCoreType(coreComposition) ? coreComposition : "UNKNOWN");
     }
 
     /**
@@ -70,7 +71,7 @@ public class GasPlanet extends Planet{
      */
     @Override
     public String toString() {
-        return classifyBody() + ": " + displayInfo() + " " + super.toString();
+        return classifyBody() + ": " + super.toString() + " " + displayInfo();
     }
     @Override
     public String toTable(){

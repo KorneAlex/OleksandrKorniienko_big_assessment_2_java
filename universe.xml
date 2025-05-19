@@ -1,71 +1,24 @@
-<controllers.PlanetSystemAPI>
-  <universe>
-    <models.IcePlanet>
-      <id>1001</id>
-      <name>TEST Ice</name>
-      <mass>65.0</mass>
-      <diameter>42.1</diameter>
-      <averageTemperature>134.0</averageTemperature>
-      <surfaceType>rock</surfaceType>
-      <hasLiquidWater>false</hasLiquidWater>
-      <iceComposition>ice</iceComposition>
-    </models.IcePlanet>
-    <models.GasPlanet>
-      <id>1000</id>
-      <name>TEST GAS</name>
-      <mass>55.0</mass>
-      <diameter>44.0</diameter>
-      <averageTemperature>87.0</averageTemperature>
-      <surfaceType>gas</surfaceType>
-      <hasLiquidWater>false</hasLiquidWater>
-      <gasComposition>GAS</gasComposition>
-      <coreComposition>BLABLA</coreComposition>
-      <radiationLevel>68.0</radiationLevel>
-    </models.GasPlanet>
-    <models.GasPlanet>
-      <id>1002</id>
-      <name>TEST GAS</name>
-      <mass>566.0</mass>
-      <diameter>445.0</diameter>
-      <averageTemperature>87.5</averageTemperature>
-      <surfaceType>gas</surfaceType>
-      <hasLiquidWater>false</hasLiquidWater>
-      <gasComposition>GAS</gasComposition>
-      <coreComposition>BLABLA</coreComposition>
-      <radiationLevel>65.0</radiationLevel>
-    </models.GasPlanet>
-    <models.IcePlanet>
-      <id>1003</id>
-      <name>TEST Ice</name>
-      <mass>6335.0</mass>
-      <diameter>452.1</diameter>
-      <averageTemperature>234.0</averageTemperature>
-      <surfaceType>rock</surfaceType>
-      <hasLiquidWater>false</hasLiquidWater>
-      <iceComposition>ice</iceComposition>
-    </models.IcePlanet>
-    <models.GasPlanet>
-      <id>1004</id>
-      <name>TEST GAS</name>
-      <mass>5566.0</mass>
-      <diameter>4444.0</diameter>
-      <averageTemperature>-77.44</averageTemperature>
-      <surfaceType>gas</surfaceType>
-      <hasLiquidWater>false</hasLiquidWater>
-      <gasComposition>GAS</gasComposition>
-      <coreComposition>BLABLA</coreComposition>
-      <radiationLevel>8.0</radiationLevel>
-    </models.GasPlanet>
-    <models.IcePlanet>
-      <id>1005</id>
-      <name>TEST Ice</name>
-      <mass>65777.0</mass>
-      <diameter>14255.1</diameter>
-      <averageTemperature>-34.0</averageTemperature>
-      <surfaceType>rock</surfaceType>
-      <hasLiquidWater>false</hasLiquidWater>
-      <iceComposition>ice</iceComposition>
-    </models.IcePlanet>
-  </universe>
-  <planetSystemFile>universe.xml</planetSystemFile>
-</controllers.PlanetSystemAPI>
+<list>
+  <models.GasPlanet>
+    <id>1000</id>
+    <name>TEST GAS</name>
+    <mass>55.0</mass>
+    <diameter>44.0</diameter>
+    <averageTemperature>87.0</averageTemperature>
+    <surfaceType>gas</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <gasComposition>GAS</gasComposition>
+    <coreComposition>BLABLA</coreComposition>
+    <radiationLevel>68.0</radiationLevel>
+  </models.GasPlanet>
+  <models.IcePlanet>
+    <id>1001</id>
+    <name>TEST Ice</name>
+    <mass>65.0</mass>
+    <diameter>42.1</diameter>
+    <averageTemperature>134.0</averageTemperature>
+    <surfaceType>rock</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>ice</iceComposition>
+  </models.IcePlanet>
+</list>

@@ -1,19 +1,11 @@
 package main;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 import controllers.PlanetSystemAPI;
 import models.GasPlanet;
 import models.IcePlanet;
 import models.Planet;
-import utils.Checkers;
-import utils.ScannerInput;
-import utils.StringUtilities;
-import utils.Utilities;
+import utils.*;
 
-
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.text.DecimalFormat;
 
 
@@ -85,7 +77,8 @@ public class Driver {
                 listAllPlanets();
                 break;
             case 6: // test
-                System.out.println(planetAPI.listAllPlanetObjectsSmallerThan(0));
+                planetAPI.sortByDiameterAscending();
+                listAllPlanets();
                 break;
             case 10:
                 saveAllData();
@@ -311,52 +304,26 @@ public class Driver {
     }
 
     private void loadAllData() {
-//        planetAPI.load();
-        /**
-         * This method loads classes Course and Student from the .xml file
-         *
-         * @param xstream creates new object of class Xstream using DomDriver
-         * @param reader creates new object of class FileReader that will read the file from the universe.xml
-         * @param universe creates list "universe" and reads it from the file
-         * @return Returns arraylist "universe"
-         */
         try {
-            XStream xstream = new XStream(new DomDriver());
-            xstream.allowTypes(new Class[]{PlanetSystemAPI.class, Planet.class, IcePlanet.class, GasPlanet.class});
-            FileReader reader = new FileReader("universe.xml");
-            planetAPI = (PlanetSystemAPI) xstream.fromXML(reader);
-            reader.close();
-            System.out.println("Loaded universe from universe.xml");
-
+            planetAPI.load();
+            System.out.println("Loaded universe from " + planetAPI.fileName());
         } catch (Exception e) {
+            System.out.println("Error loading universe from " + planetAPI.fileName());
             e.printStackTrace();
-            System.err.println("Error loading universe.");
-
         }
     }
 
 
     private void saveAllData() {
-//        planetAPI.save();
-        /**
-         * This method saves classes Course and Student to the .xml file
-         *
-         * @param xstream creates new object of class Xstream using DomDriver
-         * @param writer creates new object of class FileWriter that will write the file to the course.xml
-         * @return Returns true if the operation is successful
-         */
         try {
-            XStream xstream = new XStream(new DomDriver());
-            xstream.allowTypes(new Class[]{PlanetSystemAPI.class, Planet.class, IcePlanet.class, GasPlanet.class});
-            FileWriter writer = new FileWriter("universe.xml");
-            xstream.toXML(planetAPI, writer);
-            writer.close();
-            System.out.println("Saved universe to universe.xml");
-
+            planetAPI.save();
+            System.out.println("Saved universe to " + planetAPI.fileName());
         } catch (Exception e) {
+            System.out.println("Error saving universe to " + planetAPI.fileName());
             e.printStackTrace();
         }
     }
+
 
     private void listAllPlanets() {
         if (planetAPI.numberPlanetBodies() == 0) {

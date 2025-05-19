@@ -1,18 +1,19 @@
 package controllers;
 
-
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import main.Driver;
 import models.GasPlanet;
 import models.IcePlanet;
 import models.Planet;
 import utils.*;
 
-import java.io.File;
+import java.io.*;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.UnaryOperator;
 
-public class PlanetSystemAPI {
+public class PlanetSystemAPI implements ISerializer{
 
     //TODO Create a list to store the Planets
 
@@ -34,8 +35,9 @@ public PlanetSystemAPI() {
         return true;
     }
 
-    public Planet updateIcePlanet(int number, Planet IcePlanet) {
-        return Planet.class.cast(null); //?????
+    public Planet updateIcePlanet(int id, Planet IcePlanet) {
+
+        return universe.get(id);
     }
 
     public Planet updateGasPlanet(int number, Planet GasPlanet) {
@@ -44,8 +46,8 @@ public PlanetSystemAPI() {
 
     //TODO - ========================delete_methods========================
 
-    public String deletePlanetIndex(int index) {
-        return "What?? return Planet??";
+    public Planet deletePlanetIndex(int index) {
+        return universe.remove(index);
     }
 
     public String deletePlanetId(int id) {
@@ -178,8 +180,8 @@ public PlanetSystemAPI() {
 
     //TODO ========================get_Planet_methods========================
 
-    public String getPlanetByIndex(int index) {
-        return "What?? return Planet??";
+    public Planet getPlanetByIndex(int index) {
+        return universe.get(index);
     }
 
     public String deletePlanetById(int id) {
@@ -228,28 +230,72 @@ public PlanetSystemAPI() {
     }
 
     public void sortByDiameterAscending() {
-
+        for (int i = universe.size()-1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (universe.get(j).getDiameter() > universe.get(j + 1).getDiameter()) {
+                    swapPlanet(universe, j, j + 1);
+                }
+            }
+        }
     }
 
     //TODO ========================Top_5_methods========================
 
     public String topFiveHighestRadiationGasPlanet() {
+        ArrayList<Planet> temp = new ArrayList<>();
+        Array[]topFive = new Array[5];
+        for(Planet planet : universe){
+            if (planet instanceof GasPlanet){
+                temp.add(planet);
+            }
+        }
+        if(temp.size() == 0){
+            return "There are no Gas planets in the system.\n";
+        } else {
+            //sort
+            for (int i = temp.size()-1; i > 0; i--) {
+                for (int j = 0; j < i; j++) {
+//                    if (temp.get(j).> temp.get(j + 1).getDiameter()) {
+//                        swapPlanet(temp, j, j + 1);
+//                    }
+                }
+            }
+        }
         return "";
     }
 
     // TODO ========================Persistence_methods========================
 
     public String fileName() {
-        return "The file ... has been created.";
+        return "universe.xml";
     }
 
-    public void load() {
-        universe.clear();
-//        universe.addAll(FileOperations.loadPlanetSystem(planetSystemFile));
+    public void load() throws IOException {
+        /**
+         * This method loads the universe from the .xml file
+         *
+         * @param xstream creates new object of class Xstream using DomDriver
+         * @param reader creates new object of class FileReader that will read the file from the universe.xml
+         * @param universe creates list "universe" and reads it from the file
+         */
+            XStream xstream = new XStream(new DomDriver());
+            xstream.allowTypes(new Class[]{Planet.class, IcePlanet.class, GasPlanet.class});
+            FileReader reader = new FileReader(fileName());
+            universe = (ArrayList) xstream.fromXML(reader);
+            reader.close();
     }
 
-    public void save() {
-//        FileOperations.savePlanetSystem(universe, planetSystemFile);
+    public void save() throws IOException {
+        /**
+         * This method saves classes Course and Student to the .xml file
+         *
+         * @param xstream creates new object of class Xstream using DomDriver
+         * @param writer creates new object of class FileWriter that will write the file to the course.xml
+         */
+            XStream xstream = new XStream(new DomDriver());
+            xstream.allowTypes(new Class[]{Planet.class, IcePlanet.class, GasPlanet.class});
+            FileWriter writer = new FileWriter(fileName());
+            xstream.toXML(universe, writer);
+            writer.close();
     }
-
 }

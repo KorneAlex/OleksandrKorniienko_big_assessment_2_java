@@ -19,16 +19,16 @@ public class CoreCompositionUtility {
 
     public static boolean isValidCoreType(String type) {
         //must not be case sensitive
-        if(coreTypes.containsKey(type.toUpperCase()))
+        if(coreTypes.containsKey(type.toUpperCase())) {
             return true;
-
+        }
         return false;
     }
     public static String getCoreDescription(String type) {
         //must not be case sensitive
-        if(coreTypes.containsKey(type.toUpperCase()))
-            coreTypes.get(type);
-
+        if(coreTypes.containsKey(type.toUpperCase())) {
+            return coreTypes.get(type.toUpperCase());
+        }
         return "No Description for this type";
     }
 }

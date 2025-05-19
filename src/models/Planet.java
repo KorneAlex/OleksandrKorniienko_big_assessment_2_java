@@ -1,5 +1,7 @@
 package models;
 
+import utils.Utilities;
+
 public abstract class Planet {
     private int id = 1000; // >= 1000
     private static int nextId = 1000; // >= 1000
@@ -115,7 +117,7 @@ public abstract class Planet {
     public abstract String toTable();
 
     public String toString(){
-        return id + name + mass + diameter + averageTemperature + surfaceType + hasLiquidWater;
+        return "ID: " + id + " Name: " + name + " Mass: " + mass + " Diameter " + diameter + " Av. Temp: " + averageTemperature + " Surface Type: " + surfaceType + " Has Liquid Water: " + Utilities.booleanToYN(hasLiquidWater);
 
     }
 }
