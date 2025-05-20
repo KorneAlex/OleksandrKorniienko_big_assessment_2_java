@@ -2,6 +2,7 @@ package models;
 
 import main.Driver;
 import utils.CoreCompositionUtility;
+import utils.Utilities;
 
 public class GasPlanet extends Planet{
     private String gasComposition = ""; // max 20 chars
@@ -17,14 +18,28 @@ public class GasPlanet extends Planet{
     }
     //=============================getters=========================================
 
+    /**
+     * Retrieves the gas composition of the gas planet.
+     *
+     * @return the gas composition as a String, such as "Mostly Hydrogen and Helium"
+     */
     public String getGasComposition() {
         return gasComposition;
     }
-
+    /**
+     * Retrieves the Core Composition of the gas planet.
+     *
+     * @return the Core Composition as a String, e.g. "Rocky and Metallic" or "Liquid Metallic Hydrogen Compressed Hydrogen or Ice Giant"
+     */
     public String getCoreComposition() {
         return coreComposition;
     }
 
+    /**
+     * Retrieves the radiation level of the gas planet.
+     *
+     * @return the radiation level as a double
+     */
     public double getRadiationLevel() {
         return radiationLevel;
     }
@@ -75,6 +90,6 @@ public class GasPlanet extends Planet{
     }
     @Override
     public String toTable(){
-        return String.format(Driver.format, "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ", isHasLiquidWater(), " █ ", getGasComposition(), " █ ", getCoreComposition(), " █ ", getRadiationLevel(), " █ ");
+        return String.format(Driver.format, "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ", Utilities.booleanToYN(isHasLiquidWater()) + "     ", " █ ", getGasComposition(), " █ ", getCoreComposition(), " █ ", getRadiationLevel(), " █ ");
     }
 }

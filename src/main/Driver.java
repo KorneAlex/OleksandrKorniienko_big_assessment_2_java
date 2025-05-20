@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 public class Driver {
 
     public static final DecimalFormat df = new DecimalFormat("0.00");
-    public static int programWidth = 167;
+    public static int programWidth = 220;
     public static int menuWidth = 55;
     public static int menuMargin = (programWidth - menuWidth) / 2; // the number to use with utils.Utilities.printSymbol to make menus margin
     public static int listWidth = 220;
@@ -70,14 +70,15 @@ public class Driver {
                 System.out.println("next ID: " + Planet.getNextId());
                 break;
             case 4:
-                planetReportsMenu(2);
+                runReportsMenu();
                 break;
             case 5: // test
                 loadAllData();
                 listAllPlanets();
+                deletePlanet();
                 break;
             case 6: // test
-                planetAPI.sortByDiameterAscending();
+
                 listAllPlanets();
                 break;
             case 10:
@@ -132,7 +133,7 @@ public class Driver {
                 deletePlanet();
                 break;
             case 3:
-                listMenu();
+                listAllPlanets();
                 break;
             case 4:
 //                updatePlanet();
@@ -147,7 +148,22 @@ public class Driver {
         runPlanetAPIMenu();
     }
 
-    private void listMenu() {
+    private void planetTypeMenu() {
+        menuMargin("|=====================================================|\n");
+        menuMargin("|                  Choose Planet Type                 |\n");
+        menuMargin("|_____________________________________________________|\n");
+        menuMargin("|  1. Ice Planet                                      |\n");
+        menuMargin("|  2. Gas Planet                                      |\n");
+        menuMargin("|  0. Return to the Main menu                         |\n");
+        menuMargin("|_____________________________________________________|\n");
+        menuMargin("Enter choice : ");
+    }
+
+    private int planetsMenu(int option) {
+        return ScannerInput.readNextInt("==>> ");
+    }
+
+    private int reportsMenu() {
         menuMargin("|=====================================================|\n");
         menuMargin("|                      List Menu                      |\n");
         menuMargin("|_____________________________________________________|\n");
@@ -160,7 +176,12 @@ public class Driver {
         menuMargin("|  0. Return to the Main menu                         |\n");
         menuMargin("|_____________________________________________________|\n");
         menuMargin("Enter choice: ");
-        int option = ScannerInput.readNextInt("");
+        return ScannerInput.readNextInt("");
+    }
+
+
+    public void runReportsMenu() {
+        int option = reportsMenu();
         switch (option) {
             case 1:
                 listAllPlanets();
@@ -182,52 +203,9 @@ public class Driver {
                 break;
             default:
                 System.out.println("Invalid option");
-                listMenu();
+                runReportsMenu();
         }
-        listMenu();
-    }
-
-    private void planetTypeMenu() {
-        menuMargin("|=====================================================|\n");
-        menuMargin("|                  Choose Planet Type                 |\n");
-        menuMargin("|_____________________________________________________|\n");
-        menuMargin("|  1. Ice Planet                                      |\n");
-        menuMargin("|  2. Gas Planet                                      |\n");
-        menuMargin("|  0. Return to the Main menu                         |\n");
-        menuMargin("|_____________________________________________________|\n");
-        menuMargin("Enter choice : ");
-    }
-
-    private int planetsMenu(int option) {
-        return ScannerInput.readNextInt("==>> ");
-    }
-
-    private int reportsMenu() {
-        System.out.println(" ");
-        menuMargin("|=====================================================|\n");
-        menuMargin("|                     Reports Menu                    |\n");
-        menuMargin("|_____________________________________________________|\n");
-        menuMargin("|  1. Planets Overview                                |\n");
-        menuMargin("|  0. Return to the Main menu                         |\n");
-        menuMargin("|_____________________________________________________|\n");
-        menuMargin("Enter choice: ");
-        return ScannerInput.readNextInt("");
-    }
-
-
-
-    public void runReportsMenu() {
-        int option = reportsMenu();
-        switch (option) {
-            case 1:
-                runPlanetReportsMenu();
-                break;
-            case 0:
-                runMainMenu();
-                break;
-            default:
-                System.out.println("Invalid option");
-        }
+        runReportsMenu();
     }
 
 
@@ -250,12 +228,13 @@ public class Driver {
     //  Helper Methods
     //---------------------
     private void listAllPlanetsSmallerThan() {
-        menuMargin("Enter the minimum diameter of the planets to list: ");
-
+        menuMargin("Enter the minimum diameter of the planets to list: \n");
+        System.out.println(planetAPI.listAllPlanetObjectsSmallerThan(Checkers.inputIsBiggerThan(0)));
     }
 
     private void listAllPlanetsHeavierThan() {
-        menuMargin("Enter the minimum mass of the planets to list: ");
+        menuMargin("Enter the minimum mass of the planets to list: \n");
+        System.out.println(planetAPI.listAllPlanetObjectsHeavierThan(Checkers.inputIsBiggerThan(0)));
     }
 
 //TODO- write any helper methods that are required
@@ -268,13 +247,13 @@ public class Driver {
         menuMargin("Enter planet diameter: ");
         double planetDiameter = Checkers.inputIsBiggerThan(0);
         menuMargin("Enter planet average temperature: ");
-        double planetAverageTemperature = Checkers.inputIsInRange(-273.15,400); // 400 max is not the limit either btw
+        double planetAverageTemperature = Checkers.inputIsInRange(-273.15, 400); // 400 max is not the limit either btw
         menuMargin("Enter planet surface type: ");
         String planetSurfaceType = Utilities.truncateString(ScannerInput.nextLine(), 20);
         menuMargin("Does it have a liquid water? y/true/+ for yes or enter anything else to say no: ");
         boolean planetHasLiquidWater = Checkers.YesNotTF(ScannerInput.nextLine());
         planetTypeMenu();
-        int choice = Checkers.isInRange(0,2);
+        int choice = Checkers.isInRange(0, 2);
         if (choice == 1) {
             menuMargin("Enter Ice Composition: ");
             String iceComposition = Utilities.truncateString(ScannerInput.nextLine(), 30);
@@ -287,7 +266,7 @@ public class Driver {
             String coreComposition = Utilities.truncateString(ScannerInput.nextLine(), 30);
             menuMargin("Enter Radiation Level min 0.01 max 200.05: ");
             double radiationLevel = Checkers.inputIsInRange(0.01, 200.05);
-            planetAPI.addPlanet(new GasPlanet(planetName, planetMass, planetDiameter, planetAverageTemperature, planetSurfaceType, planetHasLiquidWater,  coreComposition, gasComposition, radiationLevel));
+            planetAPI.addPlanet(new GasPlanet(planetName, planetMass, planetDiameter, planetAverageTemperature, planetSurfaceType, planetHasLiquidWater, coreComposition, gasComposition, radiationLevel));
             menuMargin("Planet added successfully");
         } else {
             menuMargin("Something went wrong while adding planet");
@@ -295,11 +274,36 @@ public class Driver {
     }
 
 
+    /**
+     * Deletes a planet based on user input. Prompts the user to enter the ID of the planet to delete or
+     * cancel the operation. If a valid planet ID is entered, attempts to delete the corresponding planet
+     * using the planetAPI. Provides feedback to the user on whether the deletion was successful, the
+     * planet was not found, or if an error occurred during the process. If the user chooses to cancel,
+     * the operation is aborted.
+     */
     private void deletePlanet() {
-
+        menuMargin("Enter planet ID to delete or (C)ancel: ");
+        String input = ScannerInput.nextLine();
+        if (input.equalsIgnoreCase("c")) {
+            menuMargin("Planet deletion cancelled");
+            return;
+        }
+        try {
+            int parsed = Integer.parseInt(input);
+            Planet deletedPlanet = planetAPI.deletePlanetById(parsed);
+            if (deletedPlanet != null) {
+                menuMargin("Planet " + deletedPlanet.getName() + " deleted successfully");
+            } else {
+                menuMargin("Planet not found");
+            }
+        } catch (Exception e) {
+            menuMargin("Error deleting planet\n");
+            runReportsMenu();
+        }
     }
 
-    private int getValidId() {
+
+    private int getValidId(int inRange) {
         return 0;
     }
 

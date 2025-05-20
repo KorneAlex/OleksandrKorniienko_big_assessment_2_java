@@ -1,24 +1,168 @@
 <list>
   <models.GasPlanet>
     <id>1000</id>
-    <name>TEST GAS</name>
-    <mass>55.0</mass>
-    <diameter>44.0</diameter>
-    <averageTemperature>87.0</averageTemperature>
-    <surfaceType>gas</surfaceType>
+    <name>Aerion</name>
+    <mass>123.45</mass>
+    <diameter>98.76</diameter>
+    <averageTemperature>150.0</averageTemperature>
+    <surfaceType>gaseous storms</surfaceType>
     <hasLiquidWater>false</hasLiquidWater>
-    <gasComposition>GAS</gasComposition>
-    <coreComposition>BLABLA</coreComposition>
-    <radiationLevel>68.0</radiationLevel>
+    <gasComposition>Hydrogen, Helium</gasComposition>
+    <coreComposition>Compressed Hydrogen</coreComposition>
+    <radiationLevel>75.2</radiationLevel>
   </models.GasPlanet>
   <models.IcePlanet>
     <id>1001</id>
-    <name>TEST Ice</name>
-    <mass>65.0</mass>
-    <diameter>42.1</diameter>
-    <averageTemperature>134.0</averageTemperature>
-    <surfaceType>rock</surfaceType>
+    <name>Borealis</name>
+    <mass>78.9</mass>
+    <diameter>65.4</diameter>
+    <averageTemperature>-180.5</averageTemperature>
+    <surfaceType>icy plains</surfaceType>
     <hasLiquidWater>false</hasLiquidWater>
-    <iceComposition>ice</iceComposition>
+    <iceComposition>Water Ice, Ammonia Ice</iceComposition>
   </models.IcePlanet>
+  <models.GasPlanet>
+    <id>1002</id>
+    <name>Caelus</name>
+    <mass>210.0</mass>
+    <diameter>110.2</diameter>
+    <averageTemperature>250.7</averageTemperature>
+    <surfaceType>dense atmosphere</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <gasComposition>Methane, Nitrogen</gasComposition>
+    <coreComposition>Liquid Metallic Hydrogen</coreComposition>
+    <radiationLevel>120.1</radiationLevel>
+  </models.GasPlanet>
+  <models.IcePlanet>
+    <id>1003</id>
+    <name>Draugr</name>
+    <mass>45.6</mass>
+    <diameter>38.9</diameter>
+    <averageTemperature>-220.0</averageTemperature>
+    <surfaceType>frozen canyons</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>Methane Ice</iceComposition>
+  </models.IcePlanet>
+  <models.GasPlanet>
+    <id>1004</id>
+    <name>Elysium</name>
+    <mass>99.9</mass>
+    <diameter>88.0</diameter>
+    <averageTemperature>90.5</averageTemperature>
+    <surfaceType>cloud layers</surfaceType>
+    <hasLiquidWater>true</hasLiquidWater>
+    <gasComposition>Oxygen, Argon</gasComposition>
+    <coreComposition>Proportionally Small</coreComposition>
+    <radiationLevel>30.4</radiationLevel>
+  </models.GasPlanet>
+  <models.IcePlanet>
+    <id>1005</id>
+    <name>Fimbul</name>
+    <mass>105.1</mass>
+    <diameter>72.3</diameter>
+    <averageTemperature>-150.0</averageTemperature>
+    <surfaceType>glacial peaks</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>Carbon Dioxide Ice</iceComposition>
+  </models.IcePlanet>
+  <models.GasPlanet>
+    <id>1006</id>
+    <name>Gargantua</name>
+    <mass>300.0</mass>
+    <diameter>150.0</diameter>
+    <averageTemperature>350.0</averageTemperature>
+    <surfaceType>turbulent gas</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <gasComposition>Hydrogen, Helium</gasComposition>
+    <coreComposition>Ice Giant</coreComposition>
+    <radiationLevel>180.0</radiationLevel>
+  </models.GasPlanet>
+  <models.IcePlanet>
+    <id>1007</id>
+    <name>Hoth</name>
+    <mass>50.2</mass>
+    <diameter>40.1</diameter>
+    <averageTemperature>-200.0</averageTemperature>
+    <surfaceType>snowy tundras</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>Water Ice</iceComposition>
+  </models.IcePlanet>
+  <models.GasPlanet>
+    <id>1008</id>
+    <name>Ignis</name>
+    <mass>180.5</mass>
+    <diameter>100.0</diameter>
+    <averageTemperature>380.0</averageTemperature>
+    <surfaceType>superheated clouds</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <gasComposition>Sulfur Dioxide</gasComposition>
+    <coreComposition>Rocky and Metallic</coreComposition>
+    <radiationLevel>195.5</radiationLevel>
+  </models.GasPlanet>
+  <models.IcePlanet>
+    <id>1009</id>
+    <name>Jotunheim</name>
+    <mass>115.7</mass>
+    <diameter>70.0</diameter>
+    <averageTemperature>-170.0</averageTemperature>
+    <surfaceType>ice deserts</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>Nitrogen Ice</iceComposition>
+  </models.IcePlanet>
+  <models.GasPlanet>
+    <id>1010</id>
+    <name>Kronos</name>
+    <mass>250.0</mass>
+    <diameter>130.0</diameter>
+    <averageTemperature>300.0</averageTemperature>
+    <surfaceType>thick atmosphere</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <gasComposition>Ammonia, Hydrogen</gasComposition>
+    <coreComposition>Liquid Metallic Hydrogen</coreComposition>
+    <radiationLevel>160.0</radiationLevel>
+  </models.GasPlanet>
+  <models.IcePlanet>
+    <id>1011</id>
+    <name>Luminara</name>
+    <mass>60.0</mass>
+    <diameter>55.0</diameter>
+    <averageTemperature>-100.0</averageTemperature>
+    <surfaceType>shimmering ice</surfaceType>
+    <hasLiquidWater>true</hasLiquidWater>
+    <iceComposition>Water Ice</iceComposition>
+  </models.IcePlanet>
+  <models.GasPlanet>
+    <id>1012</id>
+    <name>Moros</name>
+    <mass>140.0</mass>
+    <diameter>90.0</diameter>
+    <averageTemperature>10.0</averageTemperature>
+    <surfaceType>swirling gases</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <gasComposition>Carbon Dioxide, Nitrogen</gasComposition>
+    <coreComposition>Compressed Hydrogen</coreComposition>
+    <radiationLevel>45.0</radiationLevel>
+  </models.GasPlanet>
+  <models.IcePlanet>
+    <id>1013</id>
+    <name>Niflheim</name>
+    <mass>85.0</mass>
+    <diameter>60.0</diameter>
+    <averageTemperature>-250.0</averageTemperature>
+    <surfaceType>desolate ice</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <iceComposition>Methane Ice, Ethane Ice</iceComposition>
+  </models.IcePlanet>
+  <models.GasPlanet>
+    <id>1014</id>
+    <name>Onyx</name>
+    <mass>190.0</mass>
+    <diameter>105.0</diameter>
+    <averageTemperature>200.0</averageTemperature>
+    <surfaceType>dark clouds</surfaceType>
+    <hasLiquidWater>false</hasLiquidWater>
+    <gasComposition>Hydrogen Sulfide</gasComposition>
+    <coreComposition>Rocky and Metallic</coreComposition>
+    <radiationLevel>90.0</radiationLevel>
+  </models.GasPlanet>
 </list>

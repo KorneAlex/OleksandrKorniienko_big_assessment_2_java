@@ -2,6 +2,7 @@ package models;
 
 import main.Driver;
 import utils.StringUtilities;
+import utils.Utilities;
 
 public class IcePlanet extends Planet{
     private String iceComposition = "Mostly Ice"; // max 30 chars
@@ -41,6 +42,6 @@ public class IcePlanet extends Planet{
 
     }
     public String toTable(){
-        return String.format(Driver.format, "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ", isHasLiquidWater(), " █ ", getIceComposition(), " █ ", "-", " █ ","-", " █ ");
+        return String.format(Driver.format, "█ ", getId(), " █ ", getName(), " █ ", getMass(), " █ ", getDiameter(), " █ ", getSurfaceType(), " █ ", getAverageTemperature(), " █ ",  Utilities.booleanToYN(isHasLiquidWater()) + "     ", " █ ", getIceComposition(), " █ ", "-", " █ ","-", " █ ");
     }
 }

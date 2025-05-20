@@ -1,5 +1,8 @@
 package utils;
 
+import java.io.IOError;
+import java.io.IOException;
+
 /**
  * This class contains utilities to work with Strings
  */
@@ -68,11 +71,4 @@ public class StringUtilities {
         return str + "";
     }
 
-    /**This method I took from my first assessment
-     * It gets a name makes it lovercase, goes one by one character checking their neighbor characters.
-     * If the previous character is " " or " O'" or " Mc" then current character becomes capital.
-     *
-     * @param name gets name from the user
-     * @return edited name
-     */
 }

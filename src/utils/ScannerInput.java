@@ -121,8 +121,4 @@ public class ScannerInput {
             return nextInt();
         }
     }
-
-    public static void dummy(){
-        input.nextLine();
-    }
 }
