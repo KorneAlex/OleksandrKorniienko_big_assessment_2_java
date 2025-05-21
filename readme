@@ -14,20 +14,20 @@ IcePlanet( 8 / 8)
 GasPlanet ( 8 / 8)
 
 
-Part B - PlanetSystemAPI  (X /34)
+Part B - PlanetSystemAPI  (25 /34)
 -----------------------------
 basic CRUD (10 /13 )
 reporting/numberOf methods (8 / 8)
 validation methods  & persistence  (3 / 5)
-sorting / top 5 (x / 8)                                 !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+sorting / top 5 (4 / 8)
 
 
-Part C - UX (user experience) and Driver:Mark (X /23)
+Part C - UX (user experience) and Driver:Mark (19 /23)
 -----------------------------
 Good Menu Structure  (4 / 4)
-ArrayListCRUD  - all  types handled  (x / 7)            !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ArrayListCRUD  - all  types handled  (4 / 7)
 Reports Menu - for all planets (7 / 7)
-Search, Sort, top5   (x / 4)
+Search, Sort, top5   (3 / 4)
 Save, Load, Exit   (1 / 1)
 
 
@@ -38,33 +38,43 @@ Code correctly commented (3 / 3)
 Standard naming, indentation, DRY Code etc. (4 / 5)
 Javadoc written for PlanetSystemAPI  (3 / 3)
 
-Part E - For Extra Credit (10%)  (x / 10)
+Part E - For Extra Credit (10%)  (5 / 10)
 -----------------------------
-Please list the following for each extra functionality that you implemented
-     the extra functionality
-     what changes this lead to from spec given
-     where the extra implementation took place.
+Extra credit for design :)
+For me is very important to be able to use the program comfortably.
+I'm user-orientated developer! And I agree that the functionality and efficiency is much more important,
+but I spent only around 40 min to adjust this menus from my previous assessment
 
 
-Part F - Reflection (x / 8)
+Part F - Reflection (8 / 8)
 -----------------------------
 Filled out parts A - D above (3 / 3)
 
-Rest(x / 5)
-Chronology of my implementation (what I did first, etc.. )
+Rest(5 / 5)
+Firstly I started with the menus just because for me it's easier to see and visualise what I have to do.
+Then I typed all Structure from the overview on tutors (created all classess with all their methods and variables)
+Then adjusted all my table styles using test planet.
+Set up the .xml save() and load() to be able to work with bigger list of planets
+Managed to push it to GitHub (you can see all progress there if you want on request)
+https://github.com/KorneAlex/OleksandrKorniienko_big_assessment_2_java.git
+and started working on methods one by one.
 
 Main difficulties I came across in your development of solution and how I solved them.
+The biggest issue for me was and still is, is the update class. by it self it works but when i try to use it from the Driver with other methods,
+it just doesn't work. Unfortunatelly I'm out of time and mental health to finish it before the deadline. I hope to get feedback on that method.
+Any help wold be much appreciated.
 
-Any bugs remaining in the solution or unfinished elements of spec (no need if you have detailed these in the rubric section)
 
 Main learnings from my engagement with assignment
+Learned different way to create menus
+Practices/remembered the sort and search methods
+Learned about abstract class, inheritance and interfaces
 
-Mandatory : PLease list any references used in your development/ implementation of your submission.
+Mandatory : PLease list any references used in your development/ implementation of your submission:
+All I used was lectures and labs. Didn't need to look for other information.
 
 Please consider the following statements and choose one (delete the inappropriate one)
 
 - This is my work apart from the specific references noted above (and any code from class notes). I understand the code and can decribe any parts of the solution if needs be;
 
-- This is not all my own work - I'm not sure I understand what I am submitting.
-
-
+Total: 24+25+19+10+5+3+5=91 (fells like 85)

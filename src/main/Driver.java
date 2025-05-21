@@ -64,21 +64,13 @@ public class Driver {
                 runReportsMenu();
                 break;
             case 3:
-//                searchPlanets();
-                planetAPI.addPlanet(new GasPlanet("TEST GAS", 55, 44, 87, "gas", false, "GAS", "BLABLA", 68));
-                planetAPI.addPlanet(new IcePlanet("TEST Ice", 65, 42.1, 134, "rock", false, "ice"));
-                System.out.println("next ID: " + Planet.getNextId());
+                runSearchPlanetsMenu();
                 break;
             case 4:
-                runReportsMenu();
+                runPlanetReportsMenu();
                 break;
             case 5: // test
                 loadAllData();
-                listAllPlanets();
-                deletePlanet();
-                break;
-            case 6: // test
-
                 listAllPlanets();
                 break;
             case 10:
@@ -89,12 +81,10 @@ public class Driver {
                 break;
             case 0:
                 exitApp();
-            default:
-                System.out.println("Invalid option");
-                runMainMenu();
         }
         runMainMenu();
     }
+
 
     private void exitApp() {
 
@@ -119,7 +109,7 @@ public class Driver {
         menuMargin("|  2. Delete a Planet Object                          |\n");
         menuMargin("|-----------------------------------------------------|\n");
         menuMargin("|  3. List all Planet Objects                         |\n");
-        menuMargin("|  4. Update a Planet Object                          |\n");
+        menuMargin("|  4. Update a Planet Object  (not working)           |\n");
         menuMargin("|-----------------------------------------------------|\n");
         menuMargin("|  0. Return to the Main menu                         |\n");
         menuMargin("|_____________________________________________________|\n");
@@ -136,16 +126,20 @@ public class Driver {
                 listAllPlanets();
                 break;
             case 4:
+                System.err.println("Doesn't work. Need help. Wasted 4 hours before the submission deadline.");
+                runPlanetAPIMenu();
 //                updatePlanet();
                 break;
             case 0:
                 runMainMenu();
                 break;
-            default:
-                System.out.println("Invalid option");
-                runPlanetAPIMenu();
         }
         runPlanetAPIMenu();
+    }
+
+    private void updatePlanet() {
+        Planet tempPlanet = addPlanetToUpdate();
+        planetAPI.updateIcePlanet(1005, tempPlanet);
     }
 
     private void planetTypeMenu() {
@@ -159,6 +153,12 @@ public class Driver {
         menuMargin("Enter choice : ");
     }
 
+    /**
+     * didn't really see the purpose of this method. why need this if we have CRUD?
+     *
+     * @param option
+     * @return
+     */
     private int planetsMenu(int option) {
         return ScannerInput.readNextInt("==>> ");
     }
@@ -209,18 +209,82 @@ public class Driver {
     }
 
 
-    public int planetReportsMenu(int option) {
-        return ScannerInput.readNextInt("==>> ");
-    }
-
-    public void runPlanetReportsMenu() {
-
-    }
-
     //TODO - write all the methods that are called from your menu
     //---------------------
     //  Search/Sort
     //---------------------
+
+    public int planetReportsMenu() {
+        System.out.println(" ");
+        menuMargin("|=====================================================|\n");
+        menuMargin("|                      Sort Menu                      |\n");
+        menuMargin("|_____________________________________________________|\n");
+        menuMargin("|  1. Sort by diameter ascending                      |\n");
+        menuMargin("|  2. Sort by average temperature decreasing          |\n");
+        menuMargin("|  3. Sort by ID ascending                            |\n");
+        menuMargin("|  0. Go back                                         |\n");
+        menuMargin("|_____________________________________________________|\n");
+        menuMargin("Enter choice: ");
+        return ScannerInput.nextInt();
+    }
+
+    public void runPlanetReportsMenu() {
+        int option = planetReportsMenu();
+        switch (option) {
+            case 1:
+                planetAPI.sortByDiameterAscending();
+                System.out.println(planetAPI.listAllPlanetBodies());
+                break;
+            case 2:
+                planetAPI.sortByAverageDecreasing();
+                System.out.println(planetAPI.listAllPlanetBodies());
+                break;
+            case 3:
+                planetAPI.sortByIdAscendind();
+                System.out.println(planetAPI.listAllPlanetBodies());
+                break;
+            case 0:
+                runReportsMenu();
+                break;
+        }
+        runPlanetReportsMenu();
+    }
+
+    private int searchPlanetsMenu() {
+        System.out.println(" ");
+        menuMargin("|=====================================================|\n");
+        menuMargin("|                     Search Menu                     |\n");
+        menuMargin("|_____________________________________________________|\n");
+        menuMargin("|  1. Search Planet by ID                             |\n");
+        menuMargin("|  0. Go back                                         |\n");
+        menuMargin("|_____________________________________________________|\n");
+        menuMargin("Enter choice: ");
+        return ScannerInput.nextInt();
+    }
+
+    public void runSearchPlanetsMenu() {
+        int option = searchPlanetsMenu();
+        switch (option) {
+            case 1:
+                searchPlanet();
+                break;
+            case 0:
+                runMainMenu();
+                break;
+        }
+        searchPlanetsMenu();
+    }
+
+    private void searchPlanet() {
+        menuMargin("Enter planet ID to search for: ");
+        Planet planet = planetAPI.getPlanetById(Checkers.isInRange(1000, 9999));
+        if (planet == null) {
+            menuMargin("Planet not found");
+        } else {
+            menuMargin("Planet found: \n");
+            System.out.println(planet);
+        }
+    }
 
     // TODO search by different criteria i.e. look at the list methods and give options based on that.
 // TODO sort  (and give a list of options - not a recurring menu thou)
@@ -273,6 +337,43 @@ public class Driver {
         }
     }
 
+    /**
+     * addidional add planet method for the update method wich doesnt work. more info in the readme
+     *
+     * @return new planet
+     */
+    private Planet addPlanetToUpdate() {
+        menuMargin("Enter planet name: ");
+        String planetName = Utilities.truncateString(ScannerInput.nextLine(), 30);
+        menuMargin("Enter planet mass: ");
+        double planetMass = Checkers.inputIsBiggerThan(0);
+        menuMargin("Enter planet diameter: ");
+        double planetDiameter = Checkers.inputIsBiggerThan(0);
+        menuMargin("Enter planet average temperature: ");
+        double planetAverageTemperature = Checkers.inputIsInRange(-273.15, 400); // 400 max is not the limit either btw
+        menuMargin("Enter planet surface type: ");
+        String planetSurfaceType = Utilities.truncateString(ScannerInput.nextLine(), 20);
+        menuMargin("Does it have a liquid water? y/true/+ for yes or enter anything else to say no: ");
+        boolean planetHasLiquidWater = Checkers.YesNotTF(ScannerInput.nextLine());
+        planetTypeMenu();
+        int choice = Checkers.isInRange(0, 2);
+        if (choice == 1) {
+            menuMargin("Enter Ice Composition: ");
+            String iceComposition = Utilities.truncateString(ScannerInput.nextLine(), 30);
+            return new IcePlanet(planetName, planetMass, planetDiameter, planetAverageTemperature, planetSurfaceType, planetHasLiquidWater, iceComposition);
+        } else if (choice == 2) {
+            menuMargin("Enter Gas Composition: ");
+            String gasComposition = Utilities.truncateString(ScannerInput.nextLine(), 30);
+            menuMargin("Enter Core Composition: ");
+            String coreComposition = Utilities.truncateString(ScannerInput.nextLine(), 30);
+            menuMargin("Enter Radiation Level min 0.01 max 200.05: ");
+            double radiationLevel = Checkers.inputIsInRange(0.01, 200.05);
+            return new GasPlanet(planetName, planetMass, planetDiameter, planetAverageTemperature, planetSurfaceType, planetHasLiquidWater, coreComposition, gasComposition, radiationLevel);
+        } else {
+            menuMargin("Something went wrong while updating the planet");
+        }
+        return null;
+    }
 
     /**
      * Deletes a planet based on user input. Prompts the user to enter the ID of the planet to delete or
@@ -290,7 +391,7 @@ public class Driver {
         }
         try {
             int parsed = Integer.parseInt(input);
-            Planet deletedPlanet = planetAPI.deletePlanetById(parsed);
+            Planet deletedPlanet = planetAPI.deletePlanetId(parsed);
             if (deletedPlanet != null) {
                 menuMargin("Planet " + deletedPlanet.getName() + " deleted successfully");
             } else {
@@ -302,7 +403,11 @@ public class Driver {
         }
     }
 
-
+    /**
+     * didn't get what is it for
+     * @param inRange
+     * @return
+     */
     private int getValidId(int inRange) {
         return 0;
     }

@@ -30,7 +30,7 @@ public class IcePlanet extends Planet{
      */
     @Override
     public String classifyBody(){
-        return "Ice Planet";
+        return "Ice Planet ";
     }
     @Override
     public String displayInfo(){

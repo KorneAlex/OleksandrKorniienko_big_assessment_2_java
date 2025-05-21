@@ -41,23 +41,58 @@ public PlanetSystemAPI() {
         return true;
     }
 
+    /**
+     * I GAVE UP ON THIS METHOD
+     *
+     * Simple and strict logic. without any validation because to work on validation,
+     * i need to just to make it work with hardcoded values and it doesnt!
+     *
+     * I spent last 4 hours before the submission on this issue and didn't fix it. If I can get a feedback on this it will be much appreciated
+     *
+     * Index -1 out of bounds for length 15
+     *
+     * I know what does it mean but it doesn't make sense in this scenario
+     *
+     * @param id
+     * @param IcePlanet
+     * @return
+     */
     public Planet updateIcePlanet(int id, Planet IcePlanet) {
-//        getPlanetI
-        return universe.get(id);
+            universe.set(getPlanetIndexById(id), IcePlanet);
+        return universe.get(getPlanetIndexById(id));
     }
 
-    public Planet updateGasPlanet(int number, Planet GasPlanet) {
-        return Planet.class.cast(null); //?????
+    public Planet updateGasPlanet(int id, Planet GasPlanet) {
+        universe.set(getPlanetIndexById(id), GasPlanet);
+        return universe.get(getPlanetIndexById(id));
     }
 
     //TODO - ========================delete_methods========================
 
+    /**
+     * Deletes a planet from the universe at the specified index and returns the removed planet.
+     *
+     * @param index the index of the planet to be deleted from the universe
+     * @return the Planet object that was removed from the universe
+     */
     public Planet deletePlanetIndex(int index) {
-        return universe.remove(index);
+        Planet planetToDelete = getPlanetByIndex(index);
+        System.out.println(planetToDelete.getName() + " with index " + universe.indexOf(planetToDelete) + " " + index);
+        universe.remove(planetToDelete);
+        return planetToDelete;
     }
 
-    public String deletePlanetId(int id) {
-        return "What?? return Planet??";
+    /**
+     * Deletes a planet from the universe based on its unique identifier.
+     * The planet with the specified ID is removed from the universe if it exists.
+     *
+     * @param id the unique identifier of the planet to be deleted
+     * @return the Planet object that was deleted, or null if no planet was found with the given ID
+     */
+    public Planet deletePlanetId(int id) {
+        Planet planetToDelete = getPlanetById(id);
+        universe.remove(getPlanetByIdBinary(id));
+        return planetToDelete;
     }
 
     private void swapPlanet(List<Planet> planets, int index1, int index2) {
@@ -236,7 +271,7 @@ public PlanetSystemAPI() {
      * @return true if a planet with the given ID exists
      */
     public boolean isValidId(int id) {
-        if (getPlanetById(id) != null) {
+        if (getPlanetByIdBinary(id) != null) {
             return true;
         }
         return false;
@@ -288,17 +323,25 @@ public PlanetSystemAPI() {
     }
 
     public int getPlanetIndexById(int id) {
-        if (isValidId(id)) {
-            for(int i = 0; i < universe.size(); i++){
-                if(universe.get(i).getId() == id){
-                    return i;
-                }
+        for(Planet planet : universe){
+            if(planet.getId() == id){
+                return universe.indexOf(planet);
             }
         }
         return -1;
     }
 
+    public void getPlanetIndexById() {
+        for(Planet planet : universe){
+            System.out.println(planet.getId());
+            if (planet.getId() == 1005){
+                System.out.println("found it");
+            }
+        }
+    }
+
     /**
+     * Linear search example
      * Retrieves a planet from the universe based on its unique identifier.
      *
      * @param id the unique identifier of the planet to retrieve
@@ -314,17 +357,27 @@ public PlanetSystemAPI() {
     }
 
     /**
-     * Deletes a planet from the universe based on its unique identifier.
-     * The planet with the specified ID is removed from the universe if it exists.
+     * Binary search example
+     * Searches for a planet in the universe by its unique identifier using binary search.
      *
-     * @param id the unique identifier of the planet to be deleted
-     * @return the Planet object that was deleted, or null if no planet was found with the given ID
+     * @param id the unique identifier of the planet to find
+     * @return the Planet object with the specified id if found, or null if no such planet exists
      */
-    public Planet deletePlanetById(int id) {
-        Planet planetToDelete = getPlanetById(id);
-        System.out.println(planetToDelete.getId() + " " + id);
-        universe.remove(getPlanetById(id));
-        return planetToDelete;
+    private Planet getPlanetByIdBinary(int id){
+        int left = 0;
+        int right = universe.size()-1;
+        int mid = (left + right)/2;
+        while (left <= right){
+            if(universe.get(mid).getId() == id){
+                return universe.get(mid);
+            } else if(universe.get(mid).getId() > id){
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+            mid = (left + right)/2;
+        }
+        return null;
     }
 
 
@@ -407,8 +460,32 @@ public PlanetSystemAPI() {
         }
     }
 
+    public void sortByAverageDecreasing() {
+        for (int i = universe.size()-1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (universe.get(j).getAverageTemperature() < universe.get(j + 1).getAverageTemperature()) {
+                    swapPlanet(universe, j, j + 1);
+                }
+            }
+        }
+    }
+
+    public void sortByIdAscendind() {
+        for (int i = universe.size()-1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (universe.get(j).getId() > universe.get(j + 1).getId()) {
+                    swapPlanet(universe, j, j + 1);
+                }
+            }
+        }
+    }
+
     //TODO ========================Top_5_methods========================
 
+    /**
+     * under construction
+     * @return
+     */
     public String topFiveHighestRadiationGasPlanet() {
         ArrayList<Planet> temp = new ArrayList<>();
         Array[]topFive = new Array[5];

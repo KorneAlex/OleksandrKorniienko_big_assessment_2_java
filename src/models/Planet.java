@@ -46,7 +46,7 @@ public abstract class Planet {
         return surfaceType;
     }
 
-    public int getId() { return id; } // FIX THIS
+    public int getId() { return this.id; } // FIX THIS
 
     public static int getNextId(){
         return nextId;
